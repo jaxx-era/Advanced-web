@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RankArea.AI</title>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#111;color:#fff}
+
+/* topbar */
+.topbar{
+height:60px;background:#fff;color:#000;
+display:flex;align-items:center;justify-content:space-between;
+padding:0 30px;box-shadow:0 2px 6px rgba(0,0,0,0.06)
+}
+
+.brand{font-weight:600;font-size:18px}
+
+.btn{
+border:none;border-radius:25px;
+padding:10px 20px;font-weight:600;
+cursor:pointer
+}
+
+.primary{background:#16a34a;color:#fff}
+.dark{background:#000;color:#fff}
+.light{background:#fff;color:#000}
+
+.section{display:none;padding:40px}
+.active{display:block}
+
+/* landing hero */
+.hero{
+width:100%;aspect-ratio:16/9;
+background:
+linear-gradient(to right,rgba(0,0,0,0.6),transparent 60%),
+url("https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&w=1600&q=80");
+background-size:cover;background-position:center;
+display:flex;align-items:center;padding-left:80px
+}
+
+.hero h1{max-width:420px;font-size:34px}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px
+}
+
+.card{
+background:#1c1c1c;padding:25px;border-radius:15px
+}
+
+.profile{
+width:34px;height:34px;border-radius:50%;
+background:#000;color:#fff;
+display:flex;align-items:center;justify-content:center;
+cursor:pointer
+}
+
+.container{
+max-width:400px;margin:auto;
+background:#1c1c1c;padding:30px;border-radius:15px
+}
+
+input{
+width:100%;padding:10px;margin:10px 0;
+border-radius:8px;border:none
+}
+
+.footer{text-align:center;margin-top:50px;color:#aaa}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+<div class="brand">RankArea.AI</div>
+<div>
+<button class="btn primary" onclick="show('login')">Login</button>
+<button class="btn dark" onclick="show('dashboard')">Dashboard</button>
+</div>
+</div>
+
+<!-- LANDING -->
+<section id="landing" class="section active">
+
+<div class="hero">
+<h1>How You Can Grow Your Business With AI</h1>
+</div>
+
+<br><br>
+
+<h2>How Our AI Works</h2>
+
+<p style="max-width:800px;line-height:1.8;color:#ccc">
+Our AI analyzes market data, engagement signals and growth opportunities to
+help businesses scale using structured insights and predictive intelligence.
+</p>
+
+<br>
+
+<button class="btn primary" onclick="show('login')">
+Start AI Analysis
+</button>
+
+</section>
+
+<!-- LOGIN -->
+<section id="login" class="section">
+
+<div class="container">
+
+<h2 style="text-align:center;margin-bottom:20px">Login</h2>
+
+<input type="email" placeholder="Email">
+<input type="password" placeholder="Password">
+
+<button class="btn primary" style="width:100%">
+Login & Continue
+</button>
+
+<br><br>
+
+<button class="btn dark" style="width:100%">
+Sign in with Google
+</button>
+
+<br><br>
+
+<div style="text-align:center;font-size:12px">
+<a href="#" onclick="show('privacy')">Terms & Privacy</a>
+</div>
+
+</div>
+
+</section>
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="section">
+
+<div style="display:flex;justify-content:space-between;margin-bottom:30px">
+<h2>Dashboard</h2>
+<div class="profile" onclick="show('profile')">U</div>
+</div>
+
+<div class="cards">
+
+<div class="card">
+<h3>Total Visitors</h3>
+<p>--</p>
+</div>
+
+<div class="card">
+<h3>Conversion Rate</h3>
+<p>--</p>
+</div>
+
+<div class="card">
+<h3>Growth Score</h3>
+<p>--</p>
+</div>
+
+<div class="card">
+<h3>AI Recommendations</h3>
+<p>--</p>
+</div>
+
+</div>
+
+<br>
+
+<button class="btn light" onclick="show('payment')">
+Upgrade to Premium – ₹299
+</button>
+
+<button class="btn light">
+Run AI Analysis
+</button>
+
+</section>
+
+<!-- PAYMENT -->
+<section id="payment" class="section">
+
+<div class="container">
+
+<h2>Upgrade Subscription</h2>
+
+<p>Unlock advanced AI analysis and insights.</p>
+
+<br>
+
+<button class="btn primary" onclick="payNow()">
+Unlock Premium – ₹299
+</button>
+
+</div>
+
+</section>
+
+<!-- PROFILE -->
+<section id="profile" class="section">
+
+<h2>User Profile</h2>
+
+<br>
+
+<p>Name: User</p>
+<p>Email: user@email.com</p>
+<p>Plan: Free Plan</p>
+
+<br>
+
+<button class="btn light" onclick="show('payment')">
+Upgrade to Premium
+</button>
+
+</section>
+
+<!-- PRIVACY -->
+<section id="privacy" class="section">
+
+<h1>Privacy Policy</h1>
+
+<br>
+
+<p style="max-width:800px;color:#ccc">
+RankArea.AI respects your privacy and does not sell or distribute
+your personal information without consent.
+</p>
+
+<br>
+
+<h2>Terms</h2>
+
+<p style="max-width:800px;color:#ccc">
+By using our service you agree to comply with our policies and
+terms of usage.
+</p>
+
+</section>
+
+<div class="footer">
+© 2026 RankArea.AI
+</div>
+
+<script>
+
+function show(id){
+document.querySelectorAll(".section")
+.forEach(s=>s.classList.remove("active"));
+
+document.getElementById(id).classList.add("active");
+}
+
+/* Razorpay */
+function payNow(){
+
+var options = {
+key:"YOUR_RAZORPAY_KEY",
+amount:29900,
+currency:"INR",
+name:"RankArea.AI",
+description:"Premium Plan",
+handler:function(response){
+alert("Payment Successful");
+show("dashboard");
+}
+}
+
+var rzp=new Razorpay(options);
+rzp.open();
+}
+
+</script>
+
+</body>
+</html>
